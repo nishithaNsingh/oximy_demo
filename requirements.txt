@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+httpx
+beautifulsoup4
+lxml
+anthropic
+python-dotenv
+supabase
