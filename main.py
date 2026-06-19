@@ -9,6 +9,9 @@ from schemas import AnalyzeRequest, AnalyzeResponse
 from scoring import calculate_trust_score
 from scraper import scrape_domain
 import re 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 app = FastAPI(
     title="AI Tool Risk Profiler",
     description="Automated security scoring for AI tools.",
@@ -27,6 +30,12 @@ app.add_middleware(
 # Routes
 # ---------------------------------------------------------------------------
 
+
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+@app.get("/demo")
+async def demo():
+    return FileResponse("index.html")
 
 @app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze(
